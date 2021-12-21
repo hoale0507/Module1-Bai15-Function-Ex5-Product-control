@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List Control</title>
+    <style>
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            border-radius: 6px;
+        }
+        input {
+            width: 200px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<h3>Add New Product</h3>
+<input type="text" placeholder="New Product" id="newProduct"/><button onclick="add()">Add</button>
+<h3>Display All Product</h3>
+<div id="product_list"></div>
+<script>
+    let products = ['Sony Xperia', 'Samsung Galaxy', 'Nokia 6', 'Xiaomi Redmi 4', 'Apple Iphone 6S', 'Xiami Mi 5s Plus',
+        'Apple Iphone 8 Plus', 'Fujitsu F-04E', 'Oppo A71'];
+    function display(arr) {
+        let text = '<table><tr><th align="left">Product Name</th><th><input id="productName" placeholder="Product Name"</th>' +
+            '<th>9 products</products></th></tr>';
+        for (let i = 0; i < arr.length; i++) {
+            text += '<tr><td onclick="displayName(this.id)" id="name'+ i +'">' + arr[i] + '</td><td><button id="productEdit' + i
+                + '" onclick="edit(this.id)">Edit</button></td><td><button '
+                + 'id="productDelete' + i + '" onclick="delete1(this.id)">Delete</button></td> </tr>';
+            console.log(text);
+        }
+        text += '</table>';
+        document.getElementById("product_list").innerHTML = text;
+        return text;
+    }
+    display(products);
+
+
+    // Xây dựng hàm thêm phần tử
+    function add(){
+        let addProduct = document.getElementById("newProduct").value;
+        products.push(addProduct);
+        display(products);
+        alert("You just added "+ addProduct + " successfully to your product list!")
+    }
+
+    function delete1(product){
+        let i = product[13];
+        products.splice(i,1);
+        display(products);
+    }
+
+    function displayName(product){
+        let i = product[4];
+        document.getElementById("productName").value = products[i];
+    }
+
+    function edit(product){
+        let i = product[11];
+        products[i] = document.getElementById("productName").value;
+        display(products);
+    }
+
+</script>
+</body>
+</html>
